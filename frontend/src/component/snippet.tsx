@@ -10,32 +10,31 @@ function Snippet() {
 
     const handleSubmit = async () => {
         try {
-            if(code === ''){
+            if (code === '') {
                 alert("Snippet is empty")
                 return;
             }
             // const token = localStorage.getItem('token')
             // const splitToken = token && token.split(' ')[1];
             await axios.post('http://localhost:3000/api/snippet/createSnippet', {
-                code : code,
-                language : language,
-                title:  title,
+                code: code,
+                language: language,
+                title: title,
                 userId: '681fa69c2ace49539a5a1025'
             })
             alert("submitted successfully")
-        }catch(e){
-            alert (e);
+        } catch (e) {
+            alert(e);
             console.log("error submitting snippet")
         }
     }
 
     return (
         <div>
-            <div className="fixed top-0 left-0 z-50 px-10  md:px-56 w-full">
+            <div className="fixed top-0 left-0  z-50 px-2 md:px-56  w-full">
                 <Header />
             </div>
-
-            <div className='mt-32 mx-10  md:mx-56'>
+            <div className='mt-32 mx-2  md:mx-56'>
                 <div className="flex justify-between items-center text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 my-10">
                     <div className='text-2xl'>Store & collaborate on code snippets</div>
                     <div className='flex gap-4'>
@@ -59,28 +58,28 @@ function Snippet() {
                     defaultValue=""
                     theme="vs-dark"
                     className="rounded-2xl"
-                    onChange={(e) =>{ 
+                    onChange={(e) => {
                         setCode(e || '')
                     }}
                 />
                 <div className='mt-7 flex justify-between'>
                     <input
-                    onChange={(e) =>{
-                        setTitle(e.target.value)
-                    }}
-                     type="text" placeholder='Enter suitable title for the Code snippet *' 
-                    className='focus:outline-none border border-neutral-700 px-2 rounded-xl w-[50vw]'/>
-                     <button
-                        onClick={() =>{
+                        onChange={(e) => {
+                            setTitle(e.target.value)
+                        }}
+                        type="text" placeholder='Enter suitable title for the Code snippet *'
+                        className='focus:outline-none border border-neutral-700 px-2 rounded-xl w-[50vw]' />
+                    <button
+                        onClick={() => {
                             handleSubmit()
                         }}
-                            className="bg-white px-4 py-2 cursor-pointer rounded-xl text-black hover:bg-neutral-200">
-                            Save
-                        </button>
+                        className="bg-white px-4 py-2 cursor-pointer rounded-xl text-black hover:bg-neutral-200">
+                        Save
+                    </button>
                 </div>
             </div>
 
-            <div className="py-7 px-2 text-white bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 animate-pulse-slow mx-10 rounded-2xl mt-10">
+            <div className=" py-7 px-2 text-white bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 animate-pulse-slow mx-2 md:mx-10 rounded-2xl mt-10">
                 <div className='flex justify-between'>
                     <div className='text-9xl'>
                         codeIt

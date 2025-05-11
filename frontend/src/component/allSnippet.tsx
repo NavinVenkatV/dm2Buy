@@ -45,10 +45,10 @@ function AllSnippets() {
 
   return (
     <div className='w-full min-h-screen'>
-      <div className="fixed top-0 left-0 z-50 px-10 md:px-56 w-full">
+      <div className="fixed top-0 left-0  z-50 px-2 md:px-56  w-full">
         <Header />
       </div>
-      <div className='mt-32 min-h-[500px] rounded-2xl p-2 mx-56 bg-gradient-to-b from-neutral-900 to-neutral-800'>
+      <div className='mt-32 min-h-[500px] rounded-2xl p-2 mx-2 md:mx-56 bg-gradient-to-b from-neutral-900 to-neutral-800'>
         <div className='text-transparent text-6xl text-center bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600 my-10'>
           Your Snippets
         </div>
@@ -81,17 +81,17 @@ function AllSnippets() {
         ))}
       </div>
 
-      <div className="py-7 px-2 text-white bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 animate-pulse-slow mx-10 rounded-2xl mt-10">
-        <div className='flex justify-between'>
-          <div className='text-9xl'>
-            codeIt
-            <div className='flex justify-between w-full'>
-              <p className='text-sm ml-2 mt-2 text-neutral-200'>2025 @all rights reserved</p>
-              <p className='text-sm ml-2 mt-2 text-neutral-200'>Made with 🤍 by Navin Venkat</p>
+      <div className=" py-7 px-2 text-white bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 animate-pulse-slow mx-2 md:mx-10 rounded-2xl mt-10">
+                <div className='flex justify-between'>
+                    <div className='text-9xl'>
+                        codeIt
+                        <div className='flex justify-between w-full'>
+                            <p className='text-sm ml-2 mt-2 text-neutral-200'>2025 @all rights reserved</p>
+                            <p className='text-sm ml-2 mt-2 text-neutral-200'>Made with 🤍 by Navin Venkat</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -1,0 +1,137 @@
+"use client"
+import React, { useState } from 'react'
+// import { signIn } from 'next-auth/react';
+import { motion } from "framer-motion";
+import axios from 'axios';
+import { Spin } from 'hamburger-react';
+import Spinner from './ui/spinner';
+// import Spin from './ui/spinner';
+
+function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boolean>> }) {
+    const [newUser, setNewUser] = useState(false)
+    const [name, setName] = useState('');
+    const [mail, setMail] = useState('');
+    const [pass, setPass] = useState('');
+    const [load, setLoad] = useState(false);
+    const [msg, setMsg] = useState("Submit")
+
+    const handleNewSubmit = async () => {
+        try {
+            setLoad(true)
+            if (!name || !mail || !pass) {
+                alert("Every inputs needed")
+                return;
+            }
+            const res = await axios.post('http://localhost:3000/api/user/register', {
+                userName: name,
+                email: mail,
+                password: pass
+            })
+            if (res) {
+                setMsg("Registered! Login To continue!")
+                setLoad(false)
+            }
+        } catch (e) {
+            alert(e)
+            console.log(e)
+        }
+    }
+
+    const handleOldSubmit = async () => {
+        try {
+            setLoad(true)
+            if (!mail || !pass) {
+                alert("otha inputs needed")
+                return;
+            }
+            const res = await axios.post('http://localhost:3000/api/user/login', {
+                email: mail,
+                password: pass
+            })
+            if (res) {
+                const token = res.data.token;
+                localStorage.setItem('token', `Bearer ${token}`);
+                setLogin(false)
+                setLoad(false)
+            }
+        } catch (e) {
+            alert(e)
+            console.log(e)
+        }
+    }
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className=' bg-gradient-to-br from-[#1a1a1a] via-[#243447] to-[#000000]
+ rounded-2xl w-[350px] md:w-[600px] h-[400px] text-white flex justify-center'>
+            <div className='flex flex-col justify-center'>
+                <div className='text-center'>
+                    <div className='text-3xl md:text-4xl'>Welcome Back!</div>
+                    {newUser ?
+                        <motion.div
+                            initial={{ y: -10 }}
+                            animate={{ y: 0 }}
+                            transition={{ duration: 0.4, ease: 'easeInOut' }}
+                            className='flex flex-col gap-2 items-center mt-2'>
+                            <p className='text-sm mt-2 font-bold'>Sign In to continue your journey</p>
+                            <input
+                                onChange={(e) => {
+                                    setName(e.target.value)
+                                }}
+                                type="text" placeholder='Enter Username' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
+                            <input
+                                onChange={(e) => {
+                                    setMail(e.target.value)
+                                }}
+                                type="text" placeholder='Enter email' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
+                            <input
+                                onChange={(e) => {
+                                    setPass(e.target.value)
+                                }}
+                                type="text" placeholder='Enter password' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
+                            <p
+                                onClick={() => {
+                                    setNewUser(prev => !prev)
+                                }}
+                                className='text-center underline mt-2 cursor-pointer'>Login?</p>
+                            <p
+                                onClick={() => handleNewSubmit()}
+                                className='mt-3 hover:font-bold hover:text-white text-neutral-400
+                        transition-all duration-300 ease-in-out cursor-pointer'>{!load ? msg : <Spinner />}</p>
+                        </motion.div> :
+                        <motion.div
+                            initial={{ y: -10 }}
+                            animate={{ y: 0 }}
+                            transition={{ duration: 0.4, ease: 'easeInOut' }}
+                            className='flex flex-col gap-2 items-center mt-2'>
+                            <p className='text-sm mt-2 font-bold'>Log In to continue your journey</p>
+                            <input
+                            onChange={(e) => {
+                                    setMail(e.target.value)
+                                }}
+                             type="text" placeholder='Enter email' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
+                            <input
+                            onChange={(e) => {
+                                    setPass(e.target.value)
+                                }} 
+                                type="text" placeholder='Enter password' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
+                            <p
+                                onClick={() => {
+                                    setNewUser(prev => !prev)
+                                }}
+                                className='text-center underline mt-2 cursor-pointer'>New User?</p>
+                            <p
+                                onClick={() => { handleOldSubmit() }}
+                                className='mt-3 hover:font-bold hover:text-white text-neutral-400
+                        transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
+                        </motion.div>}
+                </div>
+            </div>
+        </motion.div>
+    )
+}
+
+export default Login
