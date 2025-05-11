@@ -6,7 +6,7 @@ function CodeEditor() {
             <Editor
                 height="500px"
                 defaultLanguage="javascript, c++"
-                defaultValue="// Start coding here"
+                defaultValue=""
                 theme="vs-dark"
                 className="rounded-2xl"
             />

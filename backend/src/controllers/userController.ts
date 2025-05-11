@@ -2,7 +2,20 @@ import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import { Request, Response } from "express";
 import { user } from "../models/shema";
+import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config();
 
+const connectString = async ()=>{
+    try{
+        console.log(process.env.MONGO_URL)
+        const conn = await mongoose.connect(process.env.MONGO_URL!)
+        console.log('connected to mongo string!')
+    }catch(e){
+        console.log("error connecting mongo string", e)
+    }
+}
+connectString();
 
 //createUser
 export const createUser = async (req: Request, res: Response): Promise<void> => {
@@ -22,6 +35,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         res.json({ message: "User registered successfully!!", id: newUser.id })
         return;
     } catch (e) {
+        console.log(e);
         res.status(500).json({ message: 'Error registering user', e });
     }
 }

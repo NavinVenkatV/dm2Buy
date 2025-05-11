@@ -10,6 +10,6 @@ const snippetRouter = express_1.default.Router();
 // userRouter.post("/register", createUser);
 // userRouter.post("/login", loginUser);
 // userRouter.get("/me", authMiddleware, getUser);
-snippetRouter.post('/createSnippet', authMiddleware_1.authMiddleware, snippetControl_1.createSnippet);
+snippetRouter.post('/createSnippet', snippetControl_1.createSnippet);
 snippetRouter.put('/updateSnippet', authMiddleware_1.authMiddleware, snippetControl_1.updateSnippet);
 exports.default = snippetRouter;

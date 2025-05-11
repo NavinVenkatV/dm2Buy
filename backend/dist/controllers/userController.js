@@ -16,6 +16,20 @@ exports.getUser = exports.loginUser = exports.createUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const shema_1 = require("../models/shema");
+const mongoose_1 = __importDefault(require("mongoose"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const connectString = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log(process.env.MONGO_URL);
+        const conn = yield mongoose_1.default.connect(process.env.MONGO_URL);
+        console.log('connected to mongo string!');
+    }
+    catch (e) {
+        console.log("error connecting mongo string", e);
+    }
+});
+connectString();
 //createUser
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -35,6 +49,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return;
     }
     catch (e) {
+        console.log(e);
         res.status(500).json({ message: 'Error registering user', e });
     }
 });

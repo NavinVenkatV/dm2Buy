@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import { snippet as Snippet } from '../models/shema';
+import { snippet } from '../models/shema';
 
 export const createSnippet = async (req: Request, res: Response) : Promise<void> => {
   try {
-    const { code, title, language } = req.body;
-    const newSnippet = new Snippet({
+    const { code, title, language, userId } = req.body;
+    const newSnippet = new snippet({
       code,
       title,
       language,
-      userId: req.userId 
+      userId
     });
     await newSnippet.save();
     res.json({ message: 'Snippet created', snippet: newSnippet });
@@ -20,7 +20,7 @@ export const createSnippet = async (req: Request, res: Response) : Promise<void>
 export const updateSnippet = async (req: Request, res: Response) : Promise<void> => {
   try {
     const { code } = req.body;
-    const updatedSnippet = await Snippet.findByIdAndUpdate(
+    const updatedSnippet = await snippet.findByIdAndUpdate(
       req.params.id,
       { code, updatedAt: Date.now() },
       { new: true }
@@ -35,14 +35,42 @@ export const updateSnippet = async (req: Request, res: Response) : Promise<void>
   }
 };
 
-// export const getSnippet = async (req: Request, res: Response) => {
-//   try {
-//     const snippet = await Snippet.findById(req.params.id);
-//     if (!snippet) {
-//       return res.status(404).json({ message: 'Snippet not found' });
-//     }
-//     res.json(snippet);
-//   } catch (err) {
-//     res.status(500).json({ message: 'Error fetching snippet', error: err });
-//   }
-// };
+export const getSnippet = async (req: Request, res: Response) : Promise<void> => {
+  try {
+    console.log(req.query.id)
+    const {id} = req.query;
+    const getSnippet = await snippet.find({
+        userId : id
+    })
+    if (!getSnippet) {
+      res.status(404).json({ message: 'Snippet not found' });
+      return;
+    }
+    // console.log(getSnippet)
+    res.json(getSnippet);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching snippet', error: err });
+  }
+};
+
+export const getUniqueSnippet = async (req: Request, res: Response) : Promise<void> => {
+  try {
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+    console.log(req.query.id)
+    const {id} = req.query;
+    const getSnippet = await snippet.find({
+        _id: id
+    })
+    if (!getSnippet) {
+      res.status(404).json({ message: 'Snippet not found' });
+      return;
+    }
+    // console.log(getSnippet)
+    res.json(getSnippet);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching snippet', error: err });
+  }
+};
+
+
+
