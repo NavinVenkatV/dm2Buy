@@ -1,7 +1,7 @@
 import { Editor } from '@monaco-editor/react';
 import Header from './header';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { toFormData } from 'axios';
 
 function Snippet() {
     const [language, setLanguage] = useState("javascript");
@@ -14,14 +14,18 @@ function Snippet() {
                 alert("Snippet is empty")
                 return;
             }
-            // const token = localStorage.getItem('token')
-            // const splitToken = token && token.split(' ')[1];
+            const token = localStorage.getItem('token')
+            console.log("ttttttttttttttttttttttttttt", token)
             await axios.post('http://localhost:3000/api/snippet/createSnippet', {
-                code: code,
-                language: language,
-                title: title,
-                userId: '681fa69c2ace49539a5a1025'
-            })
+                language,
+                code,
+                title
+            }, {
+                headers: {
+                    Authorization: token 
+                }
+            });
+
             alert("submitted successfully")
         } catch (e) {
             alert(e);
@@ -31,10 +35,10 @@ function Snippet() {
 
     return (
         <div>
-            <div className="fixed top-0 left-0  z-50 px-2 md:px-56  w-full">
+            <div className="fixed top-0 left-0  z-50 px-2 lg:px-56  w-full">
                 <Header />
             </div>
-            <div className='mt-32 mx-2  md:mx-56'>
+            <div className='mt-32 mx-2  lg:mx-56'>
                 <div className="flex justify-between items-center text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 my-10">
                     <div className='text-2xl'>Store & collaborate on code snippets</div>
                     <div className='flex gap-4'>

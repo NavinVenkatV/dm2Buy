@@ -14,6 +14,7 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
     const [pass, setPass] = useState('');
     const [load, setLoad] = useState(false);
     const [msg, setMsg] = useState("Submit")
+    const [error, setError] = useState('');
 
     const handleNewSubmit = async () => {
         try {
@@ -31,8 +32,9 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                 setMsg("Registered! Login To continue!")
                 setLoad(false)
             }
-        } catch (e) {
-            alert(e)
+        } catch (e: any) {
+            const message = e.response?.data?.message || "Something went wrong";
+            setError(message);
             console.log(e)
         }
     }
@@ -41,7 +43,7 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
         try {
             setLoad(true)
             if (!mail || !pass) {
-                alert("otha inputs needed")
+                alert("all inputs needed")
                 return;
             }
             const res = await axios.post('http://localhost:3000/api/user/login', {
@@ -54,8 +56,9 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                 setLogin(false)
                 setLoad(false)
             }
-        } catch (e) {
-            alert(e)
+        } catch (e: any) {
+            const message = e.response?.data?.message || "Something went wrong";
+            setError(message); 
             console.log(e)
         }
     }
@@ -70,6 +73,9 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
             <div className='flex flex-col justify-center'>
                 <div className='text-center'>
                     <div className='text-3xl md:text-4xl'>Welcome Back!</div>
+                    {error && (
+                        <div className='text-center text-red-900 font-bold'>{error}</div>
+                    )}
                     {newUser ?
                         <motion.div
                             initial={{ y: -10 }}
@@ -98,9 +104,14 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                                 }}
                                 className='text-center underline mt-2 cursor-pointer'>Login?</p>
                             <p
-                                onClick={() => handleNewSubmit()}
-                                className='mt-3 hover:font-bold hover:text-white text-neutral-400
-                        transition-all duration-300 ease-in-out cursor-pointer'>{!load ? msg : <Spinner />}</p>
+                                onClick={() => { handleNewSubmit() }}
+                                className='mt-1 hover:font-bold hover:text-white text-neutral-400
+                        transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
+                        <p
+                                onClick={() => {
+                                    setLogin(false)
+                                }}
+                                className='text-center text-neutral-600 hover:text-neutral-400 cursor-pointer'>Close</p>
                         </motion.div> :
                         <motion.div
                             initial={{ y: -10 }}
@@ -109,14 +120,14 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                             className='flex flex-col gap-2 items-center mt-2'>
                             <p className='text-sm mt-2 font-bold'>Log In to continue your journey</p>
                             <input
-                            onChange={(e) => {
+                                onChange={(e) => {
                                     setMail(e.target.value)
                                 }}
-                             type="text" placeholder='Enter email' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
+                                type="text" placeholder='Enter email' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
                             <input
-                            onChange={(e) => {
+                                onChange={(e) => {
                                     setPass(e.target.value)
-                                }} 
+                                }}
                                 type="text" placeholder='Enter password' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
                             <p
                                 onClick={() => {
@@ -125,8 +136,13 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                                 className='text-center underline mt-2 cursor-pointer'>New User?</p>
                             <p
                                 onClick={() => { handleOldSubmit() }}
-                                className='mt-3 hover:font-bold hover:text-white text-neutral-400
+                                className='mt-1 hover:font-bold hover:text-white text-neutral-400
                         transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
+                            <p
+                                onClick={() => {
+                                    setLogin(false)
+                                }}
+                                className='text-center text-neutral-600 hover:text-neutral-400 cursor-pointer'>Close</p>
                         </motion.div>}
                 </div>
             </div>

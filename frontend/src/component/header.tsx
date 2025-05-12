@@ -15,7 +15,7 @@ function Header({ setLogin, login }: {
         if (token) {
             setIsUser(true)
         }
-    },[isUser])
+    },[])
 
     const handleLogOut = async () =>{
         localStorage.removeItem('token')
@@ -36,11 +36,13 @@ function Header({ setLogin, login }: {
                     }}
                     className="cursor-pointer hover:text-neutral-300 hidden md:block">Home</p>
                 <p className="cursor-pointer hover:text-neutral-300 hidden md:block">Docs</p>
-                <p
+                {isUser && (
+                    <p
                     onClick={() => {
                         { login ? setLogin(true) : navigate('/allSnippets') }
                     }}
                     className="cursor-pointer hover:text-neutral-300 hidden md:block">Snippets</p>
+                )}
             </div>
             {isUser ? 
             <button
