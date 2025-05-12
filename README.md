@@ -33,51 +33,39 @@ The live deployment link will be updated once the real-time Socket.IO features a
 
 ## Folder Structure
 
-/client - React frontend
-/server - Express backend
-/controllers
-/models
-/routes
-/middleware
-/utils
+- /client - React frontend
+- /server - Express backend
+- /controllers
+- /models
+- /routes
+- /middleware
+- /utils
 
 ## Setup Instructions
 
 ### 1. Clone the Repository
 
-git clone https://github.com/navinvenkat/code-snippet-keeper.git
-cd code-snippet-keeper
-## Setup Instructions
+- git clone https://github.com/navinvenkat/code-snippet-keeper.git
+- cd code-snippet-keeper
+- ## Setup Instructions
 
 ### 2. Backend Setup
 
-cd server
-npm install
-npm run dev
-
-sql
-Copy
-Edit
+- cd backend
+- npm install
+- npm run dev
 
 Create a `.env` file inside the server directory and add the following:
 
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-PORT=3000
-
-shell
-Copy
-Edit
+- MONGO_URI=your_mongodb_connection_string
+- JWT_SECRET=your_jwt_secret
+- PORT=3000
 
 ### 3. Frontend Setup
 
-cd client
-npm install
-npm run dev
-
-sql
-Copy
-Edit
+- cd client
+- npm install
+- npm run dev
 
 ## Real-Time Collaboration (In Progress)
 
