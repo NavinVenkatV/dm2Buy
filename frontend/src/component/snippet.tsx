@@ -2,6 +2,8 @@ import { Editor } from '@monaco-editor/react';
 import Header from './header';
 import { useState } from 'react';
 import axios, { toFormData } from 'axios';
+import Footer from './ui/footer';
+
 
 function Snippet() {
     const [language, setLanguage] = useState("javascript");
@@ -22,7 +24,7 @@ function Snippet() {
                 title
             }, {
                 headers: {
-                    Authorization: token 
+                    Authorization: token
                 }
             });
 
@@ -39,6 +41,7 @@ function Snippet() {
                 <Header />
             </div>
             <div className='mt-32 mx-2  lg:mx-56'>
+                
                 <div className="flex justify-between items-center text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 my-10">
                     <div className='text-2xl'>Store & collaborate on code snippets</div>
                     <div className='flex gap-4'>
@@ -59,7 +62,23 @@ function Snippet() {
                 <Editor
                     height="500px"
                     language={language}
-                    defaultValue=""
+                    defaultValue="//const taskInput = document.getElementById('taskInput');
+//const addButton = document.getElementById('addButton');
+//const taskList = document.getElementById('taskList');
+
+// Event listener for adding tasks
+//addButton.addEventListener('click', addTask);
+
+// Function to add a new task
+//function addTask() {
+  //const taskText = taskInput.value.trim();
+  //if (taskText !== '') {
+    //const listItem = document.createElement('li');
+    //listItem.textContent = taskText;
+    //taskList.appendChild(listItem);
+    //taskInput.value = '';
+  //}
+//}"
                     theme="vs-dark"
                     className="rounded-2xl"
                     onChange={(e) => {
@@ -83,17 +102,7 @@ function Snippet() {
                 </div>
             </div>
 
-            <div className=" py-7 px-2 text-white bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 animate-pulse-slow mx-2 md:mx-10 rounded-2xl mt-10">
-                <div className='flex justify-between'>
-                    <div className='text-9xl'>
-                        codeIt
-                        <div className='flex justify-between w-full'>
-                            <p className='text-sm ml-2 mt-2 text-neutral-200'>2025 @all rights reserved</p>
-                            <p className='text-sm ml-2 mt-2 text-neutral-200'>Made with 🤍 by Navin Venkat</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Footer/>
         </div>
     );
 }
