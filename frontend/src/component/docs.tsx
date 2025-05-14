@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
 import Header from './header'
 import Footer from './ui/footer'
 import { motion } from "framer-motion"
 
 function Docs() {
+    useEffect(() =>{
+        window.scrollTo(0,0)
+    },[])
     const container = {
         hidden: {},
         show: {

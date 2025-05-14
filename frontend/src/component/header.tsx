@@ -15,9 +15,9 @@ function Header({ setLogin, login }: {
         if (token) {
             setIsUser(true)
         }
-    },[])
+    }, [])
 
-    const handleLogOut = async () =>{
+    const handleLogOut = async () => {
         localStorage.removeItem('token')
         setIsUser(false)
     }
@@ -36,36 +36,42 @@ function Header({ setLogin, login }: {
                     }}
                     className="cursor-pointer hover:text-neutral-300 hidden md:block">Home</p>
                 <p
-                onClick={() =>{
-                    navigate('/docs')
-                }}
-                 className="cursor-pointer hover:text-neutral-300 hidden md:block">Docs</p>
+                    onClick={() => {
+                        navigate('/')
+                    }}
+                    className="cursor-pointer font-bold bg-orange-300 hover:bg-orange-500 transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 hidden md:block">We are Hiring!</p>
+                <p
+
+                    onClick={() => {
+                        navigate('/docs')
+                    }}
+                    className="cursor-pointer hover:text-neutral-300 hidden md:block">Docs</p>
                 {isUser && (
                     <p
-                    onClick={() => {
-                        { login ? setLogin(true) : navigate('/allSnippets') }
-                    }}
-                    className="cursor-pointer hover:text-neutral-300 hidden md:block">Snippets</p>
+                        onClick={() => {
+                            { login ? setLogin(true) : navigate('/allSnippets') }
+                        }}
+                        className="cursor-pointer hover:text-neutral-300 hidden md:block">Snippets</p>
                 )}
             </div>
-            {isUser ? 
-            <button
+            {isUser ?
+                <button
                     onClick={() => {
                         handleLogOut()
                     }}
                     className="bg-white cursor-pointer px-4 py-2 rounded-xl text-black hover:bg-neutral-200 hidden md:block">
                     Log Out
                 </button>
-                 : <div className="gap-4 items-center hidden md:flex">
-                {/* <button className="text-neutral-300 hover:text-white hidden md:block">Log In</button> */}
-                <button
-                    onClick={() => {
-                        setLogin(true)
-                    }}
-                    className="bg-white cursor-pointer px-4 py-2 rounded-xl text-black hover:bg-neutral-200 hidden md:block">
-                    Get Started
-                </button>
-            </div>}
+                : <div className="gap-4 items-center hidden md:flex">
+                    {/* <button className="text-neutral-300 hover:text-white hidden md:block">Log In</button> */}
+                    <button
+                        onClick={() => {
+                            setLogin(true)
+                        }}
+                        className="bg-white cursor-pointer px-4 py-2 rounded-xl text-black hover:bg-neutral-200 hidden md:block">
+                        Get Started
+                    </button>
+                </div>}
             <div className="md:hidden">
                 <Hamburger toggled={isOpen} toggle={setOpen} size={20} />
             </div>

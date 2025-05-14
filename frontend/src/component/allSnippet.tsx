@@ -19,7 +19,7 @@ function AllSnippets() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [codeMap, setCodeMap] = useState<{ [key: string]: string }>({});
 
-  
+
 
   const fetchSnippets = async () => {
     try {
@@ -108,7 +108,7 @@ function AllSnippets() {
           <div key={ind} className="mb-10">
             <div className="w-full rounded-xl flex justify-between items-center p-2 border border-neutral-700">
               <div className="text-neutral-500">Title: {detail.title}</div>
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-center">
                 <p
                   className="text-neutral-500 cursor-pointer"
                   onClick={() => handleUpdate(detail._id)}
@@ -122,11 +122,10 @@ function AllSnippets() {
                   Delete
                 </p>
                 <p
-                  onClick={() => navigate(`/collaborate?id=${detail._id}`)}
-                  className="text-neutral-500 cursor-pointer hover:text-neutral-700"
-                >
-                  Collaborate
-                </p>
+                  onClick={() => {
+                    navigate(`/collaborate?id=${detail._id}`)
+                  }}
+                  className="cursor-pointer bg-orange-300 hover:bg-orange-500 font-bold transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 hidden md:block">Collaborate!</p>
               </div>
             </div>
             <Editor

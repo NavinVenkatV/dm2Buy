@@ -1,6 +1,6 @@
 import { Editor } from '@monaco-editor/react';
 import Header from './header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './ui/footer';
 import { motion } from "framer-motion";
@@ -10,6 +10,10 @@ function Snippet() {
     const [language, setLanguage] = useState("javascript");
     const [code, setCode] = useState('')
     const [title, setTitle] = useState('')
+
+    useEffect(() =>{
+        window.scrollTo(0,0)
+    },[])
 
     const container = {
     hidden: {},

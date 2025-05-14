@@ -1,14 +1,41 @@
 import express from "express";
 import userRouter from "./routes/userRoutes";
 import snippetRouter from "./routes/snippetRoutes";
-import cors from 'cors'
+import cors from "cors";
+import { Server } from "socket.io";
+import http from "http";
 
 const app = express();
+const server = http.createServer(app);
+
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST", "PUT"]
+    }
+});
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+
+io.on("connection", (socket) => {
+    console.log("New user connected:", socket.id);
+
+    socket.on("join-room", (roomId) => {
+        socket.join(roomId);
+        console.log(`User ${socket.id} joined room ${roomId}`);
+    });
+
+    socket.on("code-change", ({ roomId, code }) => {
+        socket.to(roomId).emit("receive-code", code);
+    });
+
+    socket.on("disconnect", () => {
+        console.log(`User disconnected: ${socket.id}`);
+    });
+});
 
 app.use("/api/user", userRouter);
-app.use('/api/snippet', snippetRouter)
+app.use("/api/snippet", snippetRouter);
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+server.listen(3000, () => console.log("Server running on port 3000"));
