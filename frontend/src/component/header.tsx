@@ -35,7 +35,11 @@ function Header({ setLogin, login }: {
                         navigate('/')
                     }}
                     className="cursor-pointer hover:text-neutral-300 hidden md:block">Home</p>
-                <p className="cursor-pointer hover:text-neutral-300 hidden md:block">Docs</p>
+                <p
+                onClick={() =>{
+                    navigate('/docs')
+                }}
+                 className="cursor-pointer hover:text-neutral-300 hidden md:block">Docs</p>
                 {isUser && (
                     <p
                     onClick={() => {

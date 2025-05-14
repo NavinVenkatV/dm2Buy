@@ -4,6 +4,7 @@ import Home from './component/homePage';
 import Snippet from './component/snippet';
 import AllSnippets from './component/allSnippet';
 import Collaborate from './component/collaborate';
+import Docs from './component/docs';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/snippet' element={<Snippet/>}/>
         <Route path='/allSnippets'element={<AllSnippets/>}/>
         <Route path='/collaborate' element={<Collaborate/>}/>
+        <Route path='/docs' element={<Docs/>}/>
       </Routes>
     </div >
   )

@@ -182,7 +182,7 @@ function Home() {
               alt="collaboration gif"
             />
             <p className="text-center text-orange-300 font-bold italic">
-              Thank You Visiting us!
+              Thank You for Visiting us!
             </p>
           </motion.div>
         </motion.div>

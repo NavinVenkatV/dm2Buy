@@ -1,14 +1,41 @@
 import { Editor } from '@monaco-editor/react';
 import Header from './header';
 import { useState } from 'react';
-import axios, { toFormData } from 'axios';
+import axios from 'axios';
 import Footer from './ui/footer';
+import { motion } from "framer-motion";
 
 
 function Snippet() {
     const [language, setLanguage] = useState("javascript");
     const [code, setCode] = useState('')
     const [title, setTitle] = useState('')
+
+    const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const fadeInUp = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      filter: "blur(8px)",
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut",
+      },
+    },
+  };
 
     const handleSubmit = async () => {
         try {
@@ -40,9 +67,35 @@ function Snippet() {
             <div className="fixed top-0 left-0  z-50 px-2 lg:px-56  w-full">
                 <Header />
             </div>
-            <div className='mt-32 mx-2  lg:mx-56'>
-                
-                <div className="flex justify-between items-center text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 my-10">
+            <motion.div 
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+             className='mt-32 mx-2  lg:mx-56'>
+                <motion.div
+                    variants={fadeInUp} 
+                    className="mt-10">
+                    <motion.h2
+                    variants={fadeInUp}
+                     className="text-2xl font-semibold  mb-4">⚡ How to Use CodeIt</motion.h2>
+                    <p className=" mb-4">
+                        Getting started with <span className="font-bold">CodeIt</span> is simple and intuitive. Just follow the steps below to write and save your code effortlessly:
+                    </p>
+                    <ul className="list-decimal list-inside space-y-2">
+                        <li><span className="font-medium">Choose a Programming Language</span>: Select your preferred language from the dropdown (e.g., JavaScript, Python, C++, etc.).</li>
+                        <li><span className="font-medium">Start Coding</span>: Begin typing your code in the real-time collaborative editor with syntax highlighting.</li>
+                        <li><span className="font-medium">Give It a Title</span>: Add a meaningful title to your snippet so it's easier to identify later.</li>
+                        <li><span className="font-medium">Click Save</span>: Save your code securely with one click. Your snippet will be stored and accessible anytime.</li>
+                    </ul>
+                    <p className=" mt-4">
+                        Whether you're experimenting, collaborating, or storing reusable code — <span className="font-bold">CodeIt</span> makes it seamless and productive.
+                    </p>
+                </motion.div>
+
+
+                <motion.div
+                variants={fadeInUp}
+                 className="flex justify-between items-center text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 my-10">
                     <div className='text-2xl'>Store & collaborate on code snippets</div>
                     <div className='flex gap-4'>
                         <select
@@ -58,7 +111,7 @@ function Snippet() {
                             <option value="jsx">Jsx</option>
                         </select>
                     </div>
-                </div>
+                </motion.div>
                 <Editor
                     height="500px"
                     language={language}
@@ -85,12 +138,12 @@ function Snippet() {
                         setCode(e || '')
                     }}
                 />
-                <div className='mt-7 flex justify-between'>
+                <motion.div variants={fadeInUp} className='mt-7 flex justify-between'>
                     <input
                         onChange={(e) => {
                             setTitle(e.target.value)
                         }}
-                        type="text" placeholder='Enter suitable title for the Code snippet *'
+                        type="text" placeholder='Todo App*'
                         className='focus:outline-none border border-neutral-700 px-2 rounded-xl w-[50vw]' />
                     <button
                         onClick={() => {
@@ -99,10 +152,10 @@ function Snippet() {
                         className="bg-white px-4 py-2 cursor-pointer rounded-xl text-black hover:bg-neutral-200">
                         Save
                     </button>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
-            <Footer/>
+            <Footer />
         </div>
     );
 }

@@ -19,6 +19,8 @@ function AllSnippets() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [codeMap, setCodeMap] = useState<{ [key: string]: string }>({});
 
+  
+
   const fetchSnippets = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -86,9 +88,22 @@ function AllSnippets() {
         <Header />
       </div>
       <div className="mt-32 min-h-[500px] rounded-2xl p-2 mx-2 lg:mx-56 bg-gradient-to-b from-neutral-900 to-neutral-800">
-        <div className="text-transparent text-6xl text-center bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600 my-10">
-          Your Snippets
+        <div className="my-5">
+          <h2 className="text-2xl font-bold  mb-4"> Your Snippets</h2>
+          <p className=" mb-2">
+            Here you'll find all your saved code snippets. Whether you're organizing reusable code or reviewing previous work, everything is just a scroll away.
+          </p>
+          <ul className="list-disc list-inside  space-y-2">
+            <li><span className="font-medium">View</span>: Scroll through your existing code snippets with ease.</li>
+            <li><span className="font-medium">Update</span>: Click the <span className="text-neutral-500 font-semibold">Update</span> button to modify and enhance your code.</li>
+            <li><span className="font-medium">Delete</span>: Remove outdated or unwanted snippets by pressing the <span className="text-red-500 font-semibold">Delete</span> button.</li>
+            <li><span className="font-medium">Collaborate</span>: Share your snippet and work in real-time with others by hitting the <span className="text-neutral-500 font-semibold">Collaborate</span> button.</li>
+          </ul>
+          <p className=" mt-4">
+            Manage your code effortlessly and stay organized with <span className="font-bold">CodeIt</span>.
+          </p>
         </div>
+
         {snippets.map((detail, ind) => (
           <div key={ind} className="mb-10">
             <div className="w-full rounded-xl flex justify-between items-center p-2 border border-neutral-700">
@@ -156,7 +171,7 @@ function AllSnippets() {
           </div>
         )}
       </div>
-<Footer/>
+      <Footer />
     </div>
   );
 }
