@@ -10,7 +10,7 @@ function Footer() {
          className=" py-7 px-2 text-white bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 animate-pulse-slow mx-2 md:mx-10 rounded-2xl mt-10">
             <div className='flex justify-between'>
                 <div>
-                    <p className='text-5xl md:text-9xl'>CodiIt</p>
+                    <p className='text-5xl md:text-9xl'>CodeIt</p>
                     <ul className='font-bold text-neutral-400'>
                         <li
                         onClick={() =>{

@@ -3,11 +3,12 @@ import React, { useState } from 'react'
 // import { signIn } from 'next-auth/react';
 import { motion } from "framer-motion";
 import axios from 'axios';
-import { Spin } from 'hamburger-react';
-import Spinner from './ui/spinner';
-// import Spin from './ui/spinner';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleLogin, setLogin } from '../store/slice/globalSlice';
+import type { RootState } from '../store';
 
-function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boolean>> }) {
+function Login() {
+    const isLogin = useSelector((state: RootState) => state.global.isLogin);
     const [newUser, setNewUser] = useState(false)
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
@@ -15,6 +16,8 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
     const [load, setLoad] = useState(false);
     const [msg, setMsg] = useState("Submit")
     const [error, setError] = useState('');
+    const dispatch = useDispatch();
+
 
     const handleNewSubmit = async () => {
         try {
@@ -53,7 +56,7 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
             if (res) {
                 const token = res.data.token;
                 localStorage.setItem('token', `Bearer ${token}`);
-                setLogin(false)
+                dispatch(setLogin(false))
                 setLoad(false)
             }
         } catch (e: any) {
@@ -112,7 +115,7 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                         transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
                             <p
                                 onClick={() => {
-                                    setLogin(false)
+                                    dispatch(setLogin(false))
                                 }}
                                 className='text-center text-neutral-600 hover:text-neutral-400 cursor-pointer'>Close</p>
                         </motion.div> :
@@ -146,7 +149,7 @@ function Login({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
                         transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
                             <p
                                 onClick={() => {
-                                    setLogin(false)
+                                    dispatch(setLogin(false))
                                 }}
                                 className='text-center text-neutral-600 hover:text-neutral-400 cursor-pointer'>Close</p>
                         </motion.div>}

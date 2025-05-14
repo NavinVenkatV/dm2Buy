@@ -1,21 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import Hamburger from 'hamburger-react'
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setLogin } from '../store/slice/globalSlice';
+import type { RootState } from '../store';
+import { setCollab } from "../store/slice/collabSlice";
 
-function Header({ setLogin, login }: {
-    setLogin?: any,
-    login?: any
-}) {
+function Header() {
     const navigate = useNavigate();
     const [isOpen, setOpen] = useState(false)
     const [isUser, setIsUser] = useState(false)
+    const dispatch = useDispatch();
+    const isLogin = useSelector((state: RootState) => state.global.isLogin);
+
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             setIsUser(true)
         }
-    }, [])
+    }, [isLogin])
 
     const handleLogOut = async () => {
         localStorage.removeItem('token')
@@ -46,13 +50,20 @@ function Header({ setLogin, login }: {
                         navigate('/docs')
                     }}
                     className="cursor-pointer hover:text-neutral-300 hidden md:block">Docs</p>
+
                 {isUser && (
                     <p
                         onClick={() => {
-                            { login ? setLogin(true) : navigate('/allSnippets') }
+                            { isLogin ? setLogin(true) : navigate('/allSnippets') }
                         }}
                         className="cursor-pointer hover:text-neutral-300 hidden md:block">Snippets</p>
                 )}
+                <button
+                onClick={() => {
+                    dispatch(setCollab(true))
+                }}
+                 className="bg-gradient-to-br  rounded-xl px-2  border border-neutral-700 cursor-pointer from-black via-purple-900 via-blue-950 to-black ">Collaborate</button>
+
             </div>
             {isUser ?
                 <button
@@ -66,7 +77,7 @@ function Header({ setLogin, login }: {
                     {/* <button className="text-neutral-300 hover:text-white hidden md:block">Log In</button> */}
                     <button
                         onClick={() => {
-                            setLogin(true)
+                            dispatch(setLogin(true))
                         }}
                         className="bg-white cursor-pointer px-4 py-2 rounded-xl text-black hover:bg-neutral-200 hidden md:block">
                         Get Started
