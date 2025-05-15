@@ -11,17 +11,18 @@ function Footer() {
             <div className='flex justify-between'>
                 <div>
                     <p className='text-5xl md:text-9xl'>CodeIt</p>
-                    <ul className='font-bold text-neutral-400'>
+                    <ul className=' text-white'>
                         <li
                         onClick={() =>{
                             naviagate('/docs')
                         }}
-                         className='cursor-pointer hover:text-neutral-500 '>Docs</li>
+                         className='cursor-pointer  '>Docs</li>
                         <li>Terms and Condition</li>
                         <li>Privacy Policy</li>
                     </ul>
                 </div>
             </div>
+            <div className='text-center  text-black'>2025 - Navin Venkat</div>
         </motion.div>
     )
 }

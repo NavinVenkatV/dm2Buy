@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './ui/footer';
 import { motion } from "framer-motion";
-
+import {useSelector} from "react-redux"
+import type { RootState } from '../store';
 
 function Snippet() {
+    const isLogin = useSelector((state: RootState) => state.global.isLogin);
     const [language, setLanguage] = useState("javascript");
     const [code, setCode] = useState('')
     const [title, setTitle] = useState('')
@@ -100,7 +102,7 @@ function Snippet() {
                 <motion.div
                 variants={fadeInUp}
                  className="flex justify-between items-center text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-orange-500 via-red-600 to-purple-800 my-10">
-                    <div className='text-2xl'>Store & collaborate on code snippets</div>
+                    <div className='text-xl md:text-2xl'>Store & collaborate on code snippets</div>
                     <div className='flex gap-4'>
                         <select
                             id="language_selector"
@@ -153,7 +155,7 @@ function Snippet() {
                         onClick={() => {
                             handleSubmit()
                         }}
-                        className="bg-white px-4 py-2 cursor-pointer rounded-xl text-black hover:bg-neutral-200">
+                        className={`bg-white px-4 py-2 ${isLogin ? 'cursor-pointer' : 'cursor-not-allowed'} rounded-xl text-black hover:bg-neutral-200`}>
                         Save
                     </button>
                 </motion.div>

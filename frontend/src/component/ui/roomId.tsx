@@ -2,20 +2,43 @@ import { useDispatch } from "react-redux"
 import { setCollab } from "../../store/slice/collabSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"
 
 function RoomId() {
+
+
+    const fadeInGlass = {
+        hidden: {
+            opacity: 0.4,
+            filter: "blur(10px)",
+            scale: 0.95,
+        },
+        show: {
+            opacity: 1,
+            filter: "blur(0px)",
+            scale: 1,
+            transition: {
+                duration: 0.4,
+                ease: "easeOut",
+            },
+        },
+    };
 
     const navigate = useNavigate()
     const [id, setId] = useState('')
     const dispatch = useDispatch();
     return (
-        <div className="fixed  inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-opacity-50">
+        <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeInGlass}
+            className="fixed  inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-opacity-50">
             <div
-                className="flex bg-gradient-to-br max-w-xl from-black via-purple-900 via-blue-950 to-black  flex-col gap items-center mt-2 bg-neutral-700 p-10 rounded-2xl"
+                className="flex bg-gradient-to-br max-w-lg mx-3 from-black via-purple-900 via-blue-950 to-black  flex-col gap items-center mt-2 bg-neutral-700 p-4 rounded-2xl"
             >
-                <p className="text-center text-lg text-neutral-300 mb-4">
+                <p className="text-center text-neutral-300 mb-4">
                     Have a <span className="font-semibold text-white">Room ID</span>?  Paste it below and jump right into your shared coding space.
-                    Collaborate with friends, teammates, or classmates — live and in sync.
                 </p>
                 <input
                     onChange={(e) => {
@@ -25,11 +48,14 @@ function RoomId() {
                 <button
                     onClick={() => {
                         dispatch(setCollab(false))
-                        {id && navigate(`/collaborate?id=${id}`)}
+                        { id && navigate(`/collaborate?id=${id}`) }
                     }}
                     className="mt-2 text-neutral-500 hover:text-neutral-400 cursor-pointer ">Enter</button>
+                    <button className="mt-2 text-neutral-500 cursor-pointer hover:text-neutral-400 " onClick={() =>{
+                        dispatch(setCollab(false))
+                    }}>Close</button>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

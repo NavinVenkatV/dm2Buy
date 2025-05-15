@@ -24,7 +24,7 @@ export default function CollaborationSection() {
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
       variants={fadeInGlass}
-      className="mt-20 mx-2 lg:mx-56 backdrop-blur-md rounded-2xl p-6 shadow-lg"
+      className="mt-20 lg:mx-56 backdrop-blur-md rounded-2xl p-2 shadow-lg"
     >
       <div className="text-3xl md:text-5xl text-center my-10 text-neutral-600">
         Collaborate and learn

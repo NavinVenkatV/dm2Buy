@@ -53,8 +53,12 @@ function Home() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setCheckUserAuth(!!token);
-  }, []);
+    if(token){
+      setCheckUserAuth(true)
+    }else{
+      setCheckUserAuth(false,)
+    }
+  }, [checkUserAuth]);
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -69,7 +73,7 @@ function Home() {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 z-50 px-2 lg:px-56 w-full">
+      <div className="fixed top-0 left-0 z-50 px-z lg:px-56 w-full">
         <Header/>
       </div>
 
@@ -83,7 +87,7 @@ function Home() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 px-5 flex flex-col items-center gap-4 mx-2 lg:mx-56 mt-32 rounded-xl pb-8 bg-gradient-to-b from-neutral-900 to-neutral-800"
+        className="relative z-10 px-1 flex flex-col items-center gap-4 mx-2 lg:mx-56 mt-32 rounded-xl pb-8 bg-gradient-to-b from-neutral-900 to-neutral-800"
       >
         <motion.div
           variants={fadeInUp}
@@ -116,7 +120,7 @@ function Home() {
           Let's Code
         </motion.button>
 
-        <div className='mt-2 mx-2 '>
+        <div className='mt-2 '>
           <motion.div
             variants={fadeInUp}
             className='text-3xl md:text-5xl text-center my-10 text-neutral-600'

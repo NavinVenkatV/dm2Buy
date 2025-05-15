@@ -5,6 +5,10 @@ import { Editor } from "@monaco-editor/react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Footer from "./ui/footer";
+import { useSelector } from 'react-redux';
+import type { RootState } from "../store";
+import Hamburger from "hamburger-react";
+
 
 interface SnippetType {
   title: string;
@@ -15,9 +19,11 @@ interface SnippetType {
 
 function AllSnippets() {
   const navigate = useNavigate();
+  const isLogin = useSelector((state: RootState) => state.global.isLogin);
   const [snippets, setSnippets] = useState<SnippetType[]>([]);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [codeMap, setCodeMap] = useState<{ [key: string]: string }>({});
+  const [isOpen, setOpen] = useState(false)
 
 
 
@@ -37,7 +43,7 @@ function AllSnippets() {
 
   useEffect(() => {
     fetchSnippets();
-  }, []);
+  }, [isLogin]);
 
   const handleDelete = async () => {
     try {
@@ -104,29 +110,60 @@ function AllSnippets() {
           </p>
         </div>
 
-        {snippets.map((detail, ind) => (
+        {snippets.length > 0 ? snippets.map((detail, ind) => (
           <div key={ind} className="mb-10">
-            <div className="w-full rounded-xl flex justify-between items-center p-2 border border-neutral-700">
-              <div className="text-neutral-500">Title: {detail.title}</div>
-              <div className="flex gap-4 items-center">
-                <p
-                  className="text-neutral-500 cursor-pointer"
-                  onClick={() => handleUpdate(detail._id)}
-                >
-                  Update
-                </p>
-                <p
-                  onClick={() => setDeleteId(detail._id)}
-                  className="text-red-500 cursor-pointer hover:text-red-700"
-                >
-                  Delete
-                </p>
-                <p
-                  onClick={() => {
-                    navigate(`/collaborate?id=${detail._id}`)
-                  }}
-                  className="cursor-pointer bg-orange-300 hover:bg-orange-500 font-bold transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 hidden md:block">Collaborate!</p>
+            <div className="w-full rounded-xl  p-2 border border-neutral-700">
+              <div className="flex items-center justify-between">
+                <div className="text-neutral-500">Title: {detail.title}</div>
+                <div className="lg:flex gap-4 items-center hidden">
+                  <p
+                    className="text-neutral-500 cursor-pointer"
+                    onClick={() => handleUpdate(detail._id)}
+                  >
+                    Update
+                  </p>
+                  <p
+                    onClick={() => setDeleteId(detail._id)}
+                    className="text-red-500 cursor-pointer hover:text-red-700"
+                  >
+                    Delete
+                  </p>
+                  <p
+                    onClick={() => {
+                      navigate(`/collaborate?id=${detail._id}`)
+                    }}
+                    className="cursor-pointer bg-orange-300 hover:bg-orange-500 font-bold transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 ">Collaborate!</p>
+                </div>
+                <div className="lg:hidden">
+                  <Hamburger toggled={isOpen} toggle={setOpen} size={20} />
+                </div>
               </div>
+
+              {isOpen && (
+                <motion.div 
+                initial={{y:-5}}
+                animate={{y:0}}
+                transition={{duration : 0.1, ease :"easeInOut"}}
+                className="flex gap-4 items-center ">
+                  <p
+                    className="text-neutral-500 cursor-pointer"
+                    onClick={() => handleUpdate(detail._id)}
+                  >
+                    Update
+                  </p>
+                  <p
+                    onClick={() => setDeleteId(detail._id)}
+                    className="text-red-500 cursor-pointer hover:text-red-700"
+                  >
+                    Delete
+                  </p>
+                  <p
+                    onClick={() => {
+                      navigate(`/collaborate?id=${detail._id}`)
+                    }}
+                    className="cursor-pointer bg-orange-300 hover:bg-orange-500 font-bold transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 ">Collaborate!</p>
+                </motion.div>
+              )}
             </div>
             <Editor
               height="400px"
@@ -139,7 +176,9 @@ function AllSnippets() {
               className="rounded-2xl mt-7"
             />
           </div>
-        ))}
+        )) : (
+          <div className="text-center font-bold mt-5">No Snippets available!</div>
+        )}
 
         {deleteId && (
           <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-opacity-50">

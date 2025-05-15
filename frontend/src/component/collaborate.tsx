@@ -102,13 +102,13 @@ function Collaborate() {
                     className="bg-gradient-to-br from-black via-purple-900 via-blue-950 to-black shadow-sm rounded-2xl p-6 mb-6"
                 >
                     <h2 className="text-2xl font-bold mb-4">Collaborate in Real Time</h2>
-                    <p className=" text-lg leading-relaxed mb-4">
+                    <p className="  leading-relaxed mb-4">
                         This is a live collaborative coding space. You can invite your friends, classmates,
                         or team members to work together in real-time. Simply copy the Room ID below and share
                         it with them. Everyone with the same Room ID can join, edit, and view code simultaneously.
                     </p>
-                    <div className="flex items-center gap-3">
-                        <span className="bg-neutral-800 rounded-xl px-4 py-2 rounded font-mono text-sm">{id}</span>
+                    <div className="md:flex text-center items-center gap-3">
+                        <span className="bg-neutral-800 rounded-xl px-4 py-2  font-mono text-sm">{id}</span>
                         <button
                             onClick={() => {
                                 navigator.clipboard.writeText(id!);
@@ -117,7 +117,7 @@ function Collaborate() {
                                     setCopied(false);
                                 }, 5000);
                             }}
-                            className="bg-orange-300 text-black cursor-pointer px-4 py-2 hover:bg-orange-400 font-bold rounded-2xl transition"
+                            className="bg-orange-300 mt-5 md:mt-0 text-black cursor-pointer px-4 py-2 hover:bg-orange-400 font-bold rounded-2xl transition"
                         >
                             {copied ? "Copied!" : "Invite"}
                         </button>
