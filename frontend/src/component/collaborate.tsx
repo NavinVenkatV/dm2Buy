@@ -124,7 +124,7 @@ function Collaborate() {
                     </div>
                 </motion.div>
 
-                {snippet &&
+                {snippet.length > 0 ?
                     snippet.map((val, index) => (
                         <motion.div key={index} className="mb-10" variants={fadeInUp}>
                             <div className="w-full rounded-xl flex justify-between items-center p-2 border border-neutral-700">
@@ -143,7 +143,14 @@ function Collaborate() {
                                 }}
                             />
                         </motion.div>
-                    ))}
+                    )) : (
+                        <div className="text-center items-center  flex flex-col justify-center">
+                            <h1>No snippet available, Kindly please enter the correct invite code and try again!</h1>
+                            <img 
+                            className="rounded-full text-center w-[300px] h-[300px] mt-3"
+                            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnp3bzNnMHZoMG5meHA4dGxwMWZqc3g5eDMwaGFtZ3dnYzkxdDM5dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hPPx8yk3Bmqys/giphy.gif" alt="NO Snippet available" />
+                        </div>
+                    )}
             </motion.div>
             <Footer />
         </div>

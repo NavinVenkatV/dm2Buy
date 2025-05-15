@@ -70,11 +70,9 @@ function Header() {
                             navigate('/')
                         }}
                         className="cursor-pointer hover:text-neutral-300 hidden md:block">Home</p>
-                    <p
-                        onClick={() => {
-                            navigate('/')
-                        }}
-                        className="cursor-pointer font-bold bg-orange-300 hover:bg-orange-500 transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 hidden md:block">We are Hiring!</p>
+                    <a href="/navinvenkat.xyz"
+                    
+                        className="cursor-pointer font-bold bg-orange-300 hover:bg-orange-500 transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 hidden md:block">We are Hiring!</a>
                     <p
 
                         onClick={() => {

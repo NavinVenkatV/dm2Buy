@@ -70,6 +70,10 @@ function AllSnippets() {
     try {
       const token = localStorage.getItem("token");
       const updatedCode = codeMap[_id];
+      if(!updatedCode){
+        alert('Code remains unchanged!')
+        return;
+      }
 
       await axios.put(
         `http://localhost:3000/api/snippet/updateSnippet/${_id}`,

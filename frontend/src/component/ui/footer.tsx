@@ -1,7 +1,7 @@
 import {motion} from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 function Footer() {
-    const naviagate = useNavigate();
+    // const navigate = useNavigate();
     return (
         <motion.div
         initial={{y:50}}
@@ -11,7 +11,7 @@ function Footer() {
             <div className='flex justify-between'>
                 <div>
                     <p className='text-5xl md:text-9xl'>CodeIt</p>
-                    <ul className=' text-white'>
+                    {/* <ul className=' text-white'>
                         <li
                         onClick={() =>{
                             naviagate('/docs')
@@ -19,10 +19,10 @@ function Footer() {
                          className='cursor-pointer  '>Docs</li>
                         <li>Terms and Condition</li>
                         <li>Privacy Policy</li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
-            <div className='text-center  text-black'>2025 - Navin Venkat</div>
+            {/* <div className='text-center  text-black'>2025 - Navin Venkat</div> */}
         </motion.div>
     )
 }
