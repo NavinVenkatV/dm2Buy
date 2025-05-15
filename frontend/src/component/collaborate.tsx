@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { motion } from "framer-motion";
 import Footer from "./ui/footer";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://dm2buy.onrender.com");
 
 interface SnippetType {
     title: string;
@@ -73,7 +73,7 @@ function Collaborate() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         const getCollaborateSnippet = async () => {
-            const res = await axios.get(`http://localhost:3000/api/snippet/getUniqueSnippet?id=${id}`);
+            const res = await axios.get(`https://dm2buy.onrender.com/api/snippet/getUniqueSnippet?id=${id}`);
             setSnippet(res.data);
             res.data.map((val: any) => {
                 setCode(val.code);

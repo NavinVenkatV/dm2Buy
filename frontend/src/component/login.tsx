@@ -26,7 +26,7 @@ function Login() {
                 alert("Every inputs needed")
                 return;
             }
-            const res = await axios.post('http://localhost:3000/api/user/register', {
+            const res = await axios.post('https://dm2buy.onrender.com/api/user/register', {
                 userName: name,
                 email: mail,
                 password: pass
@@ -49,7 +49,7 @@ function Login() {
                 alert("all inputs needed")
                 return;
             }
-            const res = await axios.post('http://localhost:3000/api/user/login', {
+            const res = await axios.post('https://dm2buy.onrender.com/api/user/login', {
                 email: mail,
                 password: pass
             })

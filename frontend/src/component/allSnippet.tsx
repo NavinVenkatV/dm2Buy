@@ -30,7 +30,7 @@ function AllSnippets() {
   const fetchSnippets = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`http://localhost:3000/api/snippet/getSnippet`, {
+      const res = await axios.get(`https://dm2buy.onrender.com/api/snippet/getSnippet`, {
         headers: {
           Authorization: token,
         },
@@ -51,7 +51,7 @@ function AllSnippets() {
       if (!deleteId) return;
 
       await axios.delete(
-        `http://localhost:3000/api/snippet/deleteSnippet/${deleteId}`,
+        `https://dm2buy.onrender.com/api/snippet/deleteSnippet/${deleteId}`,
         {
           headers: {
             Authorization: token,
@@ -76,7 +76,7 @@ function AllSnippets() {
       }
 
       await axios.put(
-        `http://localhost:3000/api/snippet/updateSnippet/${_id}`,
+        `https://dm2buy.onrender.com/api/snippet/updateSnippet/${_id}`,
         { code: updatedCode },
         {
           headers: {

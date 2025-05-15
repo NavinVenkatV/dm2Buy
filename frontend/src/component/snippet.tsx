@@ -51,7 +51,7 @@ function Snippet() {
             }
             const token = localStorage.getItem('token')
             console.log("ttttttttttttttttttttttttttt", token)
-            await axios.post('http://localhost:3000/api/snippet/createSnippet', {
+            await axios.post('https://dm2buy.onrender.com/api/snippet/createSnippet', {
                 language,
                 code,
                 title
