@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateSnippet = exports.createSnippet = void 0;
+exports.getUniqueSnippet = exports.getSnippet = exports.updateSnippet = exports.deleteSnippet = exports.createSnippet = void 0;
 const shema_1 = require("../models/shema");
 const createSnippet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -28,29 +28,81 @@ const createSnippet = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.createSnippet = createSnippet;
+const deleteSnippet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        console.log("delete", id);
+        const userId = req.userId;
+        yield shema_1.snippet.deleteOne({
+            userId: userId,
+            _id: id
+        });
+        res.json({ message: 'Snippet Deleted' });
+    }
+    catch (err) {
+        res.status(500).json({ message: 'Error creating snippet', error: err });
+    }
+});
+exports.deleteSnippet = deleteSnippet;
 const updateSnippet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { code } = req.body;
-        const updatedSnippet = yield shema_1.snippet.findByIdAndUpdate(req.params.id, { code, updatedAt: Date.now() }, { new: true });
-        if (!updatedSnippet) {
-            res.status(404).json({ message: 'Snippet not found' });
+        const { id } = req.params;
+        console.log('updatte', id);
+        const userId = req.userId; // comes from auth middleware
+        const existingSnippet = yield shema_1.snippet.findById(id);
+        if (!existingSnippet) {
+            res.status(404).json({ message: 'Snippet otha ila da' });
             return;
         }
+        if (existingSnippet.userId.toString() !== userId) {
+            res.status(403).json({ message: 'Unauthorized to update this snippet' });
+            return;
+        }
+        existingSnippet.code = code;
+        const updatedSnippet = yield existingSnippet.save();
         res.json({ message: 'Snippet updated', snippet: updatedSnippet });
     }
     catch (err) {
+        console.error(err);
         res.status(500).json({ message: 'Error updating snippet', error: err });
     }
 });
 exports.updateSnippet = updateSnippet;
-// export const getSnippet = async (req: Request, res: Response) => {
-//   try {
-//     const snippet = await Snippet.findById(req.params.id);
-//     if (!snippet) {
-//       return res.status(404).json({ message: 'Snippet not found' });
-//     }
-//     res.json(snippet);
-//   } catch (err) {
-//     res.status(500).json({ message: 'Error fetching snippet', error: err });
-//   }
-// };
+const getSnippet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const getSnippet = yield shema_1.snippet.find({
+            userId: req.userId
+        });
+        if (!getSnippet) {
+            res.status(404).json({ message: 'Snippet not found' });
+            return;
+        }
+        // console.log(getSnippet)
+        res.json(getSnippet);
+    }
+    catch (err) {
+        res.status(500).json({ message: 'Error fetching snippet', error: err });
+    }
+});
+exports.getSnippet = getSnippet;
+const getUniqueSnippet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        console.log(req.query.id);
+        const { id } = req.query;
+        const getSnippet = yield shema_1.snippet.find({
+            _id: id
+        });
+        if (!getSnippet) {
+            res.status(404).json({ message: 'Snippet not found' });
+            return;
+        }
+        // console.log(getSnippet)
+        res.json(getSnippet);
+    }
+    catch (err) {
+        res.status(500).json({ message: 'Error fetching snippet', error: err });
+    }
+});
+exports.getUniqueSnippet = getUniqueSnippet;
