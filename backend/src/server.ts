@@ -4,6 +4,8 @@ import snippetRouter from "./routes/snippetRoutes";
 import cors from "cors";
 import { Server } from "socket.io";
 import http from "http";
+import dotenv from "dotenv"
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
