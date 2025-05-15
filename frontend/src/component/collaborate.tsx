@@ -7,7 +7,10 @@ import io from "socket.io-client";
 import { motion } from "framer-motion";
 import Footer from "./ui/footer";
 
-const socket = io("https://dm2buy.onrender.com");
+const socket = io(import.meta.env.PROD_BACKEND_URL || "http://localhost:3000",{
+    transports : ['websocket'],
+    withCredentials : true
+});
 
 interface SnippetType {
     title: string;
@@ -87,12 +90,12 @@ function Collaborate() {
 
     return (
         <div className="w-full min-h-screen">
-            <div className="fixed top-0 left-0 z-50 px-2 md:px-56 w-full">
+            <div className="fixed top-0 left-0 z-50 px-2 lg:px-56 w-full">
                 <Header />
             </div>
 
             <motion.div
-                className="mt-32 min-h-[500px] rounded-2xl p-2 mx-2 md:mx-56 bg-gradient-to-b from-neutral-900 to-neutral-800"
+                className="mt-32 min-h-[500px] rounded-2xl p-2 mx-2 lg:mx-56 bg-gradient-to-b from-neutral-900 to-neutral-800"
                 variants={container}
                 initial="hidden"
                 animate="show"

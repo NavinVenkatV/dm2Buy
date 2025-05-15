@@ -9,16 +9,22 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+const allowedUrls = ['https://dm2-buy.vercel.app", "http://localhost:3000" ']
+
 
 const io = new Server(server, {
     cors: {
-        origin: "https://dm2-buy.vercel.app/",
+        origin: allowedUrls,
         methods: ["GET", "POST", "PUT"]
     }
 });
 
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+    origin : allowedUrls,
+    credentials : true
+}));
 
 io.on("connection", (socket) => {
     console.log("New user connected:", socket.id);
@@ -39,6 +45,8 @@ io.on("connection", (socket) => {
 
 app.use("/api/user", userRouter);
 app.use("/api/snippet", snippetRouter);
+const PORT = process.env.PORT || 3000;
 
-server.listen(process.env.PORT || 3000, () => console.log("Server running on port "));
-console.log(process.env.PORT)
+server.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
