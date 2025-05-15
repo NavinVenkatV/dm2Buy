@@ -123,12 +123,13 @@ function Header() {
                             navigate('/')
                         }}
                         className="cursor-pointer hover:text-neutral-300 ">Home</motion.p>
+                    <motion.a href="/navinvenkat.xyz" variants={fadeInUp}
+                        // onClick={() => {
+                        //     navigate('/')
+                        // }}
+                        className="cursor-pointer font-bold  transition-all duration-300 ease-in-out rounded-2xl   ">We are Hiring!</motion.a>
                     <motion.p variants={fadeInUp}
-                        onClick={() => {
-                            navigate('/')
-                        }}
-                        className="cursor-pointer font-bold  transition-all duration-300 ease-in-out rounded-2xl   ">We are Hiring!</motion.p>
-                    <motion.p variants={fadeInUp}
+                    
 
                         onClick={() => {
                             navigate('/docs')
