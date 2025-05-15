@@ -49,7 +49,7 @@ function Collaborate() {
     const [snippet, setSnippet] = useState<SnippetType[]>([]);
     const [code, setCode] = useState("");
     const [copied, setCopied] = useState(false);
-    const [snippetId, setSnippetId] = useState()
+    // const [snippetId, setSnippetId] = useState()
     const [isOwner, setIsOwner] = useState(false)
 
 

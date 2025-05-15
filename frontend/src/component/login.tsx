@@ -1,27 +1,27 @@
 "use client"
-import React, { useState } from 'react'
+import { useState } from 'react'
 // import { signIn } from 'next-auth/react';
 import { motion } from "framer-motion";
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleLogin, setLogin } from '../store/slice/globalSlice';
-import type { RootState } from '../store';
+import {  useDispatch } from 'react-redux';
+import {  setLogin } from '../store/slice/globalSlice';
+// import type { RootState } from '../store';
 
 function Login() {
-    const isLogin = useSelector((state: RootState) => state.global.isLogin);
+    // const isLogin = useSelector((state: RootState) => state.global.isLogin);
     const [newUser, setNewUser] = useState(false)
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [pass, setPass] = useState('');
-    const [load, setLoad] = useState(false);
-    const [msg, setMsg] = useState("Submit")
+    // const [load, setLoad] = useState(false);
+    // const [msg, setMsg] = useState("Submit")
     const [error, setError] = useState('');
     const dispatch = useDispatch();
 
 
     const handleNewSubmit = async () => {
         try {
-            setLoad(true)
+            // setLoad(true)
             if (!name || !mail || !pass) {
                 alert("Every inputs needed")
                 return;
@@ -32,8 +32,8 @@ function Login() {
                 password: pass
             })
             if (res) {
-                setMsg("Registered! Login To continue!")
-                setLoad(false)
+                // setMsg("Registered! Login To continue!")
+                // setLoad(false)
             }
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";
@@ -44,7 +44,7 @@ function Login() {
 
     const handleOldSubmit = async () => {
         try {
-            setLoad(true)
+            // setLoad(true)
             if (!mail || !pass) {
                 alert("all inputs needed")
                 return;
@@ -57,7 +57,7 @@ function Login() {
                 const token = res.data.token;
                 localStorage.setItem('token', `Bearer ${token}`);
                 dispatch(setLogin(false))
-                setLoad(false)
+                // setLoad(false)
             }
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";
