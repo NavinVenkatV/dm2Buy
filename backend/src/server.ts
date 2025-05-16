@@ -9,13 +9,13 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const allowedUrls = ['https://dm2-buy.vercel.app", "http://localhost:3000" ']
+const allowedUrls = ['https://dm2-buy.vercel.app', 'http://localhost:3000']
 
 
 const io = new Server(server, {
     cors: {
         origin: allowedUrls,
-        methods: ["GET", "POST", "PUT"]
+        methods: ["GET", "POST", "PUT", "OPTIONS"]
     }
 });
 
