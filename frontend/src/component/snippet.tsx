@@ -6,11 +6,11 @@ import Footer from './ui/footer';
 import { motion } from "framer-motion";
 import {useDispatch, useSelector} from "react-redux"
 import type { RootState } from '../store';
-import { useNavigate } from 'react-router-dom';
-import { setLogin } from '../store/slice/globalSlice';
+// import { useNavigate } from 'react-router-dom';
+// import { setLogin } from '../store/slice/globalSlice';
 
 function Snippet() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const isLogin = useSelector((state: RootState) => state.global.isLogin);
     const [language, setLanguage] = useState("javascript");
     const [code, setCode] = useState('')
