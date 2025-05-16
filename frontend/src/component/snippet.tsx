@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import {useSelector} from "react-redux"
 import type { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
+import { setLogin } from '../store/slice/globalSlice';
 
 function Snippet() {
     const navigate = useNavigate();
@@ -31,10 +32,10 @@ function Snippet() {
   useEffect(() =>{
     const token = localStorage.getItem('token');
     if(!token) {
-        navigate('/')
+        setLogin(true)
         return;
     }
-  },[])
+  },[navigate])
 
   const fadeInUp = {
     hidden: {
