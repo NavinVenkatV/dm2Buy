@@ -33,8 +33,7 @@ function Login() {
                 password: pass
             })
             if (res) {
-                // setMsg("Registered! Login To continue!")
-                // setLoad(false)
+                setError("Registered! Login To continue!")
             }
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";

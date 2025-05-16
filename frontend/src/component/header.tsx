@@ -104,7 +104,7 @@ function Header() {
                         onClick={() => {
                             handleLogOut()
                         }}
-                        className="bg-white cursor-pointer px-4 py-2 rounded-xl text-black hover:bg-neutral-200 hidden md:block">
+                        className="bg-white cursor-pointer px-4 py-2 rounded-xl  text-black hover:bg-neutral-200 hidden md:block">
                         Log Out
                     </button>
                     : <div className="gap-4 items-center hidden md:flex">
