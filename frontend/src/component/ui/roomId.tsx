@@ -35,7 +35,8 @@ function RoomId() {
             variants={fadeInGlass}
             className="fixed  inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-opacity-50">
             <div
-                className="flex bg-gradient-to-br max-w-lg mx-3 from-black via-purple-900 via-blue-950 to-black  flex-col gap items-center mt-2 bg-neutral-700 p-4 rounded-2xl"
+                className="flex bg-gradient-to-br from-[#1a1c40] via-[#3f2b96] to-[#a8c0ff]
+ max-w-lg mx-3   flex-col gap items-center mt-2 bg-neutral-700 p-4 rounded-2xl"
             >
                 <p className="text-center text-neutral-300 mb-4">
                     Have a <span className="font-semibold text-white">Room ID</span>?  Paste it below and jump right into your shared coding space.
@@ -50,8 +51,8 @@ function RoomId() {
                         dispatch(setCollab(false))
                         { id && navigate(`/collaborate?id=${id}`) }
                     }}
-                    className="mt-2 text-neutral-500 hover:text-neutral-400 cursor-pointer ">Enter</button>
-                    <button className="mt-2 text-neutral-500 cursor-pointer hover:text-neutral-400 " onClick={() =>{
+                    className="mt-2 text-neutral-300 hover:text-neutral-400 cursor-pointer ">Enter</button>
+                    <button className="mt-2 text-neutral-300 cursor-pointer hover:text-neutral-400 " onClick={() =>{
                         dispatch(setCollab(false))
                     }}>Close</button>
             </div>

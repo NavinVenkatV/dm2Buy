@@ -103,7 +103,7 @@ function Collaborate() {
             >
                 <motion.div
                     variants={fadeInUp}
-                    className="bg-gradient-to-br from-black via-purple-900 via-blue-950 to-black shadow-sm rounded-2xl p-6 mb-6"
+                    className="bg-gradient-to-br from-[#1a1c40] via-[#3f2b96] to-[#a8c0ff] shadow-sm rounded-2xl p-6 mb-6"
                 >
                     <h2 className="text-2xl font-bold mb-4">Collaborate in Real Time</h2>
                     <p className="  leading-relaxed mb-4">

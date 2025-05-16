@@ -91,7 +91,8 @@ function Home() {
       >
         <motion.div
           variants={fadeInUp}
-          className="bg-gradient-to-br from-[#0f0f0f] via-[#0b1b33] border-1 border-neutral-800 to-[#000000] animate-gradient text-sm rounded-2xl px-5 py-1 mt-16"
+          className="bg-gradient-to-br from-[#1a1c40] via-[#3f2b96] to-[#a8c0ff]
+ animate-gradient text-sm rounded-2xl px-5 py-1 mt-16"
         >
           Currently in beta v1.0
         </motion.div>

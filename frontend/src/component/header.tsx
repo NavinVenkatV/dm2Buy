@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setLogin } from '../store/slice/globalSlice';
 import type { RootState } from '../store';
 import { setCollab } from "../store/slice/collabSlice";
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
 function Header() {
     const navigate = useNavigate();
@@ -14,31 +14,31 @@ function Header() {
     const dispatch = useDispatch();
     const isLogin = useSelector((state: RootState) => state.global.isLogin);
 
-     const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.3,
-      },
-    },
-  };
+    const container = {
+        hidden: {},
+        show: {
+            transition: {
+                staggerChildren: 0.3,
+            },
+        },
+    };
 
-  const fadeInUp = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      filter: "blur(8px)",
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.6,
-        ease: "easeInOut",
-      },
-    },
-  };
+    const fadeInUp = {
+        hidden: {
+            opacity: 0,
+            y: 20,
+            filter: "blur(8px)",
+        },
+        show: {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            transition: {
+                duration: 0.6,
+                ease: "easeInOut",
+            },
+        },
+    };
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -53,26 +53,30 @@ function Header() {
     }
 
     return (
-        <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className=" mt-10 border border-neutral-800 px-2  md:px-5 py-2 rounded-2xl bg-neutral-900/80 backdrop-blur-sm">
+        <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className=" mt-10 border border-neutral-800 px-2  md:px-5 py-2 rounded-2xl bg-neutral-900/80 backdrop-blur-sm">
             <motion.div variants={fadeInUp} className="flex justify-between">
                 <div className="flex gap-4 items-center">
-                    <span
-                        onClick={() => {
-                            navigate('/')
-                        }}
-                        className="font-bold cursor-pointer">codeIt</span>
+                    <div className="flex items-center">
+                        <img src="logo.png" className="pt-1" alt="" width={60} height={60} />
+                        <span
+                            onClick={() => {
+                                navigate('/')
+                            }}
+                            className="font-bold cursor-pointer">
+                            codeIt</span>
+                    </div>
                     <p
                         onClick={() => {
                             navigate('/')
                         }}
                         className="cursor-pointer hover:text-neutral-300 hidden md:block">Home</p>
                     <a href="/navinvenkat.xyz"
-                    
-                        className="cursor-pointer font-bold bg-orange-300 hover:bg-orange-500 transition-all duration-300 ease-in-out text-black rounded-2xl text-sm p-1 hidden md:block">We are Hiring!</a>
+
+                        className="cursor-pointer font-bold  transition-all duration-300 ease-in-out text-white rounded-2xl text-sm p-1 hidden md:block">We are Hiring!</a>
                     <p
 
                         onClick={() => {
@@ -91,7 +95,8 @@ function Header() {
                         onClick={() => {
                             dispatch(setCollab(true))
                         }}
-                        className="bg-gradient-to-br  rounded-xl px-2  border border-neutral-700 cursor-pointer from-black via-purple-900 via-blue-950 to-black ">Collaborate</button>
+                        className="rounded-xl px-2  border border-neutral-700 cursor-pointer bg-gradient-to-br from-[#1a1c40] via-[#3f2b96] to-[#a8c0ff]
+ ">Collaborate</button>
 
                 </div>
                 {isUser ?
@@ -129,7 +134,7 @@ function Header() {
                         // }}
                         className="cursor-pointer font-bold  transition-all duration-300 ease-in-out rounded-2xl   ">We are Hiring!</motion.a>
                     <motion.p variants={fadeInUp}
-                    
+
 
                         onClick={() => {
                             navigate('/docs')

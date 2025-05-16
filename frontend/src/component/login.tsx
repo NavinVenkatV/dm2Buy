@@ -3,9 +3,10 @@ import { useState } from 'react'
 // import { signIn } from 'next-auth/react';
 import { motion } from "framer-motion";
 import axios from 'axios';
-import {  useDispatch } from 'react-redux';
-import {  setLogin } from '../store/slice/globalSlice';
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../store/slice/globalSlice';
 // import type { RootState } from '../store';
+
 
 function Login() {
     // const isLogin = useSelector((state: RootState) => state.global.isLogin);
@@ -13,7 +14,7 @@ function Login() {
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [pass, setPass] = useState('');
-    // const [load, setLoad] = useState(false);
+    const [load, setLoad] = useState(false);
     // const [msg, setMsg] = useState("Submit")
     const [error, setError] = useState('');
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function Login() {
 
     const handleOldSubmit = async () => {
         try {
-            // setLoad(true)
+            setLoad(true)
             if (!mail || !pass) {
                 alert("all inputs needed")
                 return;
@@ -57,7 +58,7 @@ function Login() {
                 const token = res.data.token;
                 localStorage.setItem('token', `Bearer ${token}`);
                 dispatch(setLogin(false))
-                // setLoad(false)
+                setLoad(false)
             }
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";
@@ -109,10 +110,12 @@ function Login() {
                                     setNewUser(prev => !prev)
                                 }}
                                 className='text-center underline mt-2 cursor-pointer'>Login?</p>
-                            <p
-                                onClick={() => { handleNewSubmit() }}
-                                className='mt-1 hover:font-bold hover:text-white text-neutral-400
+                            {load ? <span className="loading loading-dots loading-xs"></span> :
+                                <p
+                                    onClick={() => { handleNewSubmit() }}
+                                    className='mt-1 hover:font-bold hover:text-white text-neutral-400
                         transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
+                            }
                             <p
                                 onClick={() => {
                                     dispatch(setLogin(false))
