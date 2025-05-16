@@ -1,15 +1,16 @@
 import { Editor } from '@monaco-editor/react';
 import Header from './header';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './ui/footer';
 import { motion } from "framer-motion";
 import { useSelector} from "react-redux"
 import type { RootState } from '../store';
-// import { useNavigate } from 'react-router-dom';
-// import { setLogin } from '../store/slice/globalSlice';
+import { useNavigate } from 'react-router-dom';
+import { setLogin } from '../store/slice/globalSlice';
 
 function Snippet() {
+    const navigate = useNavigate();
     // const dispatch = useDispatch();
     const isLogin = useSelector((state: RootState) => state.global.isLogin);
     const [language, setLanguage] = useState("javascript");
@@ -19,6 +20,14 @@ function Snippet() {
     useEffect(() =>{
         window.scrollTo(0,0)
     },[])
+
+    useEffect(() =>{
+        const token = localStorage.getItem('token')
+        if(!token){
+            navigate('/')
+            return;
+        }
+    }, [setLogin])
 
     const container = {
     hidden: {},
