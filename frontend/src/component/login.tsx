@@ -14,7 +14,7 @@ function Login() {
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [pass, setPass] = useState('');
-    const [load, setLoad] = useState(false);
+    // const [load, setLoad] = useState(false);
     // const [msg, setMsg] = useState("Submit")
     const [error, setError] = useState('');
     const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function Login() {
             if (res) {
                 setError("Registered! Login To continue!")
             }
-            
+
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";
             setError(message);
@@ -45,7 +45,7 @@ function Login() {
 
     const handleOldSubmit = async () => {
         try {
-            setLoad(true)
+            // setLoad(true)
             if (!mail || !pass) {
                 alert("all inputs needed")
                 return;
@@ -58,7 +58,7 @@ function Login() {
                 const token = res.data.token;
                 localStorage.setItem('token', `Bearer ${token}`);
                 dispatch(setLogin(false))
-                setLoad(false)
+                // setLoad(false)
             }
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";
@@ -88,34 +88,35 @@ function Login() {
                             className='flex flex-col gap-2 items-center mt-2'>
                             <p className='text-sm mt-2 font-bold'>Sign In to continue your journey</p>
                             <input
+                                value={name}
                                 onChange={(e) => {
                                     setName(e.target.value)
                                 }}
                                 type="text" placeholder='Enter Username' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
                             <input
+                                value={mail}
                                 onChange={(e) => {
                                     setMail(e.target.value)
                                 }}
                                 type="text" placeholder='Enter email' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
                             <input
+                                value={pass}
                                 onChange={(e) => {
                                     setPass(e.target.value)
                                 }}
                                 type="password" placeholder='Enter password' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
-                            <p
+                            <div
                                 onClick={() => {
                                     setName('')
                                     setMail('')
                                     setPass('')
                                     setNewUser(prev => !prev)
                                 }}
-                                className='text-center underline mt-2 cursor-pointer'>Login?</p>
-                            {load ? <span className="loading loading-dots loading-xs"></span> :
-                                <p
-                                    onClick={() => { handleNewSubmit() }}
-                                    className='mt-1 hover:font-bold hover:text-white text-neutral-400
+                                className='text-center underline mt-2 cursor-pointer'>Login?</div>
+                            <p
+                                onClick={() => { handleNewSubmit() }}
+                                className='mt-1 hover:font-bold hover:text-white text-neutral-400
                         transition-all duration-300 ease-in-out cursor-pointer'>Submit</p>
-                            }
                             <p
                                 onClick={() => {
                                     dispatch(setLogin(false))
@@ -129,23 +130,25 @@ function Login() {
                             className='flex flex-col gap-2 items-center mt-2'>
                             <p className='text-sm mt-2 font-bold'>Log In to continue your journey</p>
                             <input
+                                value={mail}
                                 onChange={(e) => {
                                     setMail(e.target.value)
                                 }}
                                 type="text" placeholder='Enter email' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
                             <input
+                                value={pass}
                                 onChange={(e) => {
                                     setPass(e.target.value)
                                 }}
                                 type="password" placeholder='Enter password' className='focus:outline-none w-full border-neutral-600 border p-2 rounded-xl' />
-                            <p
+                            <div
                                 onClick={() => {
                                     setName('')
                                     setMail('')
                                     setPass('')
                                     setNewUser(prev => !prev)
                                 }}
-                                className='text-center underline mt-2 cursor-pointer'>New User?</p>
+                                className='text-center underline mt-2 cursor-pointer'>New User?</div>
                             <p
                                 onClick={() => { handleOldSubmit() }}
                                 className='mt-1 hover:font-bold hover:text-white text-neutral-400
