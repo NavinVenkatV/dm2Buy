@@ -1,6 +1,6 @@
 import { Editor } from '@monaco-editor/react';
 import Header from './header';
-import { use, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './ui/footer';
 import { motion } from "framer-motion";
