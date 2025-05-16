@@ -58,7 +58,7 @@ function Home() {
     } else {
       setCheckUserAuth(false,)
     }
-  }, [setLogin]);
+  }, [isLogin]);
 
   useEffect(() => {
     const lenis = new Lenis();
