@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from './ui/footer';
 import { motion } from "framer-motion";
-import {useDispatch, useSelector} from "react-redux"
+import { useSelector} from "react-redux"
 import type { RootState } from '../store';
 // import { useNavigate } from 'react-router-dom';
 // import { setLogin } from '../store/slice/globalSlice';
