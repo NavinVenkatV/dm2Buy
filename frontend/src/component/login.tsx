@@ -35,6 +35,7 @@ function Login() {
             if (res) {
                 setError("Registered! Login To continue!")
             }
+            
         } catch (e: any) {
             const message = e.response?.data?.message || "Something went wrong";
             setError(message);
