@@ -7,13 +7,13 @@ import Login from './login';
 import { motion } from "framer-motion";
 import CollaborationSection from './ui/codeImage';
 import Footer from './ui/footer';
-import { useSelector } from 'react-redux';
-// import { setLogin } from '../store/slice/globalSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '../store/slice/globalSlice';
 import type { RootState } from '../store';
 
 
 function Home() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const isLogin = useSelector((state: RootState) => state.global.isLogin);
 
@@ -58,7 +58,7 @@ function Home() {
     } else {
       setCheckUserAuth(false,)
     }
-  }, [checkUserAuth]);
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -114,8 +114,7 @@ function Home() {
         <motion.button
           variants={fadeInUp}
           onClick={() => {
-            // checkUserAuth ? navigate('/snippet') : dispatch(setLogin(true));
-            navigate('/snippet')
+            checkUserAuth ? navigate('/snippet') : dispatch(setLogin(true));
           }}
           className="bg-white px-4 py-2 cursor-pointer rounded-xl text-black hover:bg-neutral-200"
         >
