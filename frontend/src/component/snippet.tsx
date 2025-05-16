@@ -32,6 +32,7 @@ function Snippet() {
   useEffect(() =>{
     const token = localStorage.getItem('token');
     if(!token) {
+        
         setLogin(true)
         return;
     }
