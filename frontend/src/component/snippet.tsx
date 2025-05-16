@@ -6,8 +6,10 @@ import Footer from './ui/footer';
 import { motion } from "framer-motion";
 import {useSelector} from "react-redux"
 import type { RootState } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 function Snippet() {
+    const navigate = useNavigate();
     const isLogin = useSelector((state: RootState) => state.global.isLogin);
     const [language, setLanguage] = useState("javascript");
     const [code, setCode] = useState('')
@@ -25,6 +27,14 @@ function Snippet() {
       },
     },
   };
+
+  useEffect(() =>{
+    const token = localStorage.getItem('token');
+    if(!token) {
+        navigate('/')
+        return;
+    }
+  },[])
 
   const fadeInUp = {
     hidden: {

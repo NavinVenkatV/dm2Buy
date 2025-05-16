@@ -7,22 +7,22 @@ import Login from './login';
 import { motion } from "framer-motion";
 import CollaborationSection from './ui/codeImage';
 import Footer from './ui/footer';
-import { useDispatch, useSelector } from 'react-redux';
-import {  setLogin } from '../store/slice/globalSlice';
+import { useSelector } from 'react-redux';
+// import { setLogin } from '../store/slice/globalSlice';
 import type { RootState } from '../store';
 
 
 function Home() {
-  const dispatch = useDispatch();
-  
+  // const dispatch = useDispatch();
+
   const isLogin = useSelector((state: RootState) => state.global.isLogin);
 
   const [checkUserAuth, setCheckUserAuth] = useState(false);
   // const [login, setLogin] = useState(false);
 
-  useEffect(() =>{
-        window.scrollTo(0,0)
-    },[])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const container = {
     hidden: {},
@@ -53,9 +53,9 @@ function Home() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if(token){
+    if (token) {
       setCheckUserAuth(true)
-    }else{
+    } else {
       setCheckUserAuth(false,)
     }
   }, [checkUserAuth]);
@@ -74,12 +74,12 @@ function Home() {
   return (
     <div>
       <div className="fixed top-0 left-0 z-50 px-z lg:px-56 w-full">
-        <Header/>
+        <Header />
       </div>
 
       {isLogin && (
         <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-sm bg-opacity-50">
-          <Login/>
+          <Login />
         </div>
       )}
 
@@ -114,7 +114,8 @@ function Home() {
         <motion.button
           variants={fadeInUp}
           onClick={() => {
-            checkUserAuth ? navigate('/snippet') : dispatch(setLogin(true));
+            // checkUserAuth ? navigate('/snippet') : dispatch(setLogin(true));
+            navigate('/snippet')
           }}
           className="bg-white px-4 py-2 cursor-pointer rounded-xl text-black hover:bg-neutral-200"
         >
@@ -206,9 +207,9 @@ function Home() {
       </motion.div>
 
 
-      <CollaborationSection/>
+      <CollaborationSection />
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
