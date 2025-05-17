@@ -9,13 +9,14 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-// const allowedUrls = [
-//   'https://codeit.navinvenkat.xyz'
-// ];
+const allowedUrls = [
+  'https://codeit.navinvenkat.xyz',
+  'http://localhost:3000'
+];
 
 const io = new Server(server, {
     cors: {
-        origin: 'https://codeit.navinvenkat.xyz',
+        origin: allowedUrls,
         methods: ["GET", "POST", "PUT", "OPTIONS"]
     }
 });
@@ -23,7 +24,7 @@ const io = new Server(server, {
 app.use(express.json());
 
 app.use(cors({
-    origin : 'https://codeit.navinvenkat.xyz',
+    origin : allowedUrls,
     credentials : true
 }));
 
