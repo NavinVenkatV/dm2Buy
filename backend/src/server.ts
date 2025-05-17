@@ -10,8 +10,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const allowedUrls = [
-  'https://codeit.navinvenkat.xyz',
-  'http://localhost:3000'
+  'https://codeit.navinvenkat.xyz'
 ];
 
 const io = new Server(server, {
