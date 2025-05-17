@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const allowedUrls = ['https://dm2-buy.vercel.app', 'http://localhost:3000']
+const allowedUrls = ['https://codeit.navinvenkat.xyz', 'http://localhost:3000']
 
 
 const io = new Server(server, {
